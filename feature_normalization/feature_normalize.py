@@ -55,7 +55,8 @@ class FeatureProcessor:
             
     def process(self, file_path, output_file, result_row_handler=None, header_handler=None):
         """ Processes a given input file: normalizes features, 
-            extracts max feature index from each row and its difference from the corresponding mean,
+            extracts max feature index (if several features have the max value. the first one is chosen)
+            from each row and its difference from the corresponding mean,
             writes to file (by default, can be overwritten)
     
         Parameters
