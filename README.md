@@ -1,7 +1,11 @@
 # feature_normalization
 This is a straightforward implementation for features normalization.
 
-Currently Z-normalization is provided, other options can be implemented by implementing Normalizer interface.
+Currently Z-normalization is provided (`ZNormalizer`), 
+other options can be implemented by implementing Normalizer interface.
+
+`ZNormalizer` uses train file to learn sample mean and std for each feature. 
+Afterwards, these values are used for normalization: (x-mean)/std
 
 To run an example:
 1. Clone the repository

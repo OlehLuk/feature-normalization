@@ -16,8 +16,10 @@ def get_parser():
 
 
 if __name__ == "__main__":
+    print("processing started")
     args = get_parser().parse_args()
     zn = ZNormalizer()
     zn.fit(args.train)
     pr = FeatureProcessor(zn)
     pr.process(args.input, args.output)
+    print("processing finished")

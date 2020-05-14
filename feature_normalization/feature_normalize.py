@@ -169,8 +169,10 @@ class ZNormalizer(Normalizer):
         self.fit_std(train_file_path)
 
     def fit_std(self, train_file_path):
-        """ Learns features std. Standard deviation is calculated based on train population, not sample.
-        In other words, sum of squared differences is divided by n, not (n-1)
+        """ Learns features std.
+        Standard deviation is corrected sample standard deviation of train data.
+        I.e. sum of squared differences is divided by (n-1), not n.
+        This provides unbiased estimate for std, especially important for small train data.
     
         Parameters
         ----------
@@ -190,7 +192,8 @@ class ZNormalizer(Normalizer):
                 sums += np.power((features - self.means[feature_type]), 2)
                 counter += 1
 
-            self.stds[feature_type] = np.sqrt(sums / (counter-1))
+            denom = (counter-1) if counter > 1 else 1
+            self.stds[feature_type] = np.sqrt(sums / denom)
         
     def normalize(self, feature_type, feature_index, feature_value):
         """ Calculates z-normalized value for the given feature using the corresponding mean and std
