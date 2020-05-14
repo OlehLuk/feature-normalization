@@ -7,6 +7,9 @@ other options can be implemented by implementing Normalizer interface.
 `ZNormalizer` uses train file to learn sample mean and std for each feature. 
 Afterwards, these values are used for normalization: (x-mean)/std
 
+`FeatureProcesser` uses provided normalizer to process raw input files: for each row normalize features, 
+find max feature index and its difference from the corresponding mean. Result is written to file.
+
 To run an example:
 1. Clone the repository
 2. Put your train and test files in the data folder
